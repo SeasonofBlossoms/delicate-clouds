@@ -1,0 +1,1 @@
+{"version":3,"file":"generate.d.ts","sourceRoot":"","sources":["../../../src/commands/generate.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,WAAW,CAAC;AAapC,qBAAa,eAAe;IACxB,OAAO,CAAC,eAAe,CAAkB;;IAMzC,QAAQ,CAAE,OAAO,EAAE,OAAO,GAAG,IAAI;YAanB,OAAO;YAsDP,iBAAiB;IAsB/B,OAAO,CAAC,aAAa;CAqBxB"}

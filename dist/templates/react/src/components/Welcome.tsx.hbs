@@ -1,0 +1,38 @@
+import React from 'react';
+import './Welcome.css';
+
+const Welcome: React.FC = () => {
+  return (
+    <div className="project-info">
+      <h1>🚀 {{projectName}}</h1>
+      <p>欢迎使用您的全新 React + TypeScript 项目！</p>
+      
+      <div className="project-meta">
+        <span className="meta-item">作者: {{author}}</span>
+        <span className="meta-item">创建时间: {{date}}</span>
+        <span className="meta-item">框架: React 18 + TypeScript</span>
+        <span className="meta-item">构建工具: Vite</span>
+      </div>
+      
+      <div className="welcome-content">
+        <h3>📋 快速开始</h3>
+        <ol className="welcome-steps">
+          <li>运行 <code>npm install</code> 安装依赖</li>
+          <li>运行 <code>npm run dev</code> 启动开发服务器</li>
+          <li>在浏览器中打开 <code>http://localhost:3000</code></li>
+          <li>开始编写您的 React 组件！</li>
+        </ol>
+        
+        <h3>🛠️ 可用脚本</h3>
+        <ul className="welcome-scripts">
+          <li><code>npm run dev</code> - 启动开发服务器</li>
+          <li><code>npm run build</code> - 构建生产版本</li>
+          <li><code>npm run preview</code> - 预览生产构建</li>
+          <li><code>npm run lint</code> - 运行代码检查</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default Welcome;

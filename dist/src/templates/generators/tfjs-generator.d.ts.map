@@ -1,0 +1,1 @@
+{"version":3,"file":"tfjs-generator.d.ts","sourceRoot":"","sources":["../../../../src/templates/generators/tfjs-generator.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,aAAa,EAAE,MAAM,kBAAkB,CAAC;AAIjD,qBAAa,aAAc,SAAQ,aAAa;IAC5C,IAAI,SAAgB;cAEJ,uBAAuB,CACnC,UAAU,EAAE,MAAM,EAClB,SAAS,EAAE,MAAM,CAAC,MAAM,EAAE,GAAG,CAAC,GAC/B,OAAO,CAAC,IAAI,CAAC;YAgCF,qBAAqB;CAmBtC"}

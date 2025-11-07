@@ -1,0 +1,1 @@
+{"version":3,"file":"vue-generator.d.ts","sourceRoot":"","sources":["../../../../src/templates/generators/vue-generator.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,aAAa,EAAE,MAAM,kBAAkB,CAAC;AAGjD,qBAAa,YAAa,SAAQ,aAAa;IAC3C,IAAI,SAAS;cAEG,uBAAuB,CACnC,UAAU,EAAE,MAAM,GAEnB,OAAO,CAAC,IAAI,CAAC;CAiBnB"}
