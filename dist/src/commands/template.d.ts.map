@@ -1,1 +1,0 @@
-{"version":3,"file":"template.d.ts","sourceRoot":"","sources":["../../../src/commands/template.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,WAAW,CAAC;AAOpC,qBAAa,eAAe;IACxB,OAAO,CAAC,eAAe,CAAkB;;IAMzC,QAAQ,CAAE,OAAO,EAAE,OAAO,GAAG,IAAI;YA6BnB,aAAa;YAcb,cAAc;YAyCd,eAAe;CAKhC"}
