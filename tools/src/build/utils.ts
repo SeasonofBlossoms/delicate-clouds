@@ -17,9 +17,6 @@ export class BuildUtils {
     static async access (dir: string) {
         return fs.access(dir);
     }
-    static async rm (dir: string) {
-        fs.rm(dir, { recursive: true, force: true });
-    }
     static async clean (dir: string) {
         try {
             await fs.access(dir);

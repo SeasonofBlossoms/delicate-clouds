@@ -14,6 +14,9 @@
     "src/**/*",
     "templates/**/*"
   ],
+  "bin": {
+    "dcli": "./bin/dc-cli.js"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT",

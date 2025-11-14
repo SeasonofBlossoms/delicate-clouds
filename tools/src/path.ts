@@ -117,6 +117,7 @@ export class PathUtils {
     static isAbsolute (filePath: string): boolean {
         return path.isAbsolute(filePath);
     }
+
 }
 
 /**

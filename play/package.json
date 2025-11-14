@@ -1,11 +1,12 @@
 {
-  "name": "delicate-clouds",
+  "name": "play",
   "version": "1.0.0",
   "description": "",
-  "keywords": [],
+  "main": "index.js",
   "scripts": {
-    "build:cli": "dct build:cli"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.21.0"

@@ -5,6 +5,9 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "type": "module",
+  "bin": {
+    "dct": "./bin/dc-tools.js"
+  },
   "exports": {
     ".": {
       "import": {
@@ -14,14 +17,19 @@
       "require": "./src/index.js"
     }
   },
+  "files": [
+    "bin/**/*",
+    "src/**/*"
+  ],
   "scripts": {
     "build": "tsc",
-    "publish": "pnpm link"
+    "build:self": "tsx ./src/build/build-self.ts"
   },
   "dependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^24.10.0",
     "fs-extra": "^11.3.2",
     "tsx": "^4.20.6"
-  }
+  },
+  "packageManager": "pnpm@10.21.0"
 }
