@@ -25,12 +25,10 @@
     "commander": "^14.0.2",
     "fs-extra": "^11.3.2",
     "handlebars": "^4.7.8",
-    "inquirer": "^12.11.0",
-    "@delicate-clouds/tools": "workspace:*"
+    "inquirer": "^12.11.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
-    "@types/inquirer": "^9.0.9",
     "@types/node": "^24.10.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
