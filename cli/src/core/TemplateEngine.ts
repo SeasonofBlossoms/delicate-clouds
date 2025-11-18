@@ -1,7 +1,7 @@
 // src/core/TemplateEngine.ts
 import Handlebars from 'handlebars';
 import { registerHelpers } from '../utils/handlebarsHelpers.js';
-import type { PromptAnswer } from '../types/prompts.js';
+import type { Answers } from '../types/prompts.js';
 
 export class TemplateEngine {
     private handlebars: typeof Handlebars;
@@ -11,7 +11,7 @@ export class TemplateEngine {
         registerHelpers(this.handlebars);
     }
 
-    compile (template: string, data: PromptAnswer): string {
+    compile (template: string, data: Answers): string {
         try {
             const compiledTemplate = this.handlebars.compile(template);
             return compiledTemplate(data);

@@ -2,10 +2,10 @@
 import fs from 'fs-extra';
 import path from 'path';
 import type { Action, ActionResult, AddAction, ModifyAction, AppendAction } from '../types/actions.js'; // 确保从正确的路径导入
-import type { PromptAnswer } from '../types/prompts.js';
+import type { Answers } from '../types/prompts.js';
 
 export class ActionExecutor {
-    async executeActions (actions: Action[], answers: PromptAnswer): Promise<ActionResult[]> {
+    async executeActions (actions: Action[], answers: Answers): Promise<ActionResult[]> {
         const results: ActionResult[] = [];
 
         for (const action of actions) {
@@ -38,7 +38,7 @@ export class ActionExecutor {
         return results;
     }
 
-    private async executeAction (action: Action, answers: PromptAnswer): Promise<any> {
+    private async executeAction (action: Action, answers: Answers): Promise<any> {
         switch (action.type) {
             case 'add':
                 return await this.addFile(action, answers);
@@ -51,7 +51,7 @@ export class ActionExecutor {
         }
     }
 
-    private async addFile (action: Action, answers: PromptAnswer): Promise<{ filePath: string; action: string }> {
+    private async addFile (action: Action, answers: Answers): Promise<{ filePath: string; action: string }> {
         if (!action.path) {
             throw new Error('Path is required for add action');
         }
@@ -75,7 +75,7 @@ export class ActionExecutor {
         return { filePath, action: fileExists ? 'overwritten' : 'created' };
     }
 
-    private async modifyFile (action: Action, answers: PromptAnswer): Promise<{ filePath: string; changes: number }> {
+    private async modifyFile (action: Action, answers: Answers): Promise<{ filePath: string; changes: number }> {
         if (!action.path) {
             throw new Error('Path is required for modify action');
         }
@@ -104,7 +104,7 @@ export class ActionExecutor {
         throw new Error('Modify action requires either template or pattern with template');
     }
 
-    private async appendToFile (action: Action, answers: PromptAnswer): Promise<{ filePath: string; appended: boolean }> {
+    private async appendToFile (action: Action, answers: Answers): Promise<{ filePath: string; appended: boolean }> {
         if (!action.path || !action.template) {
             throw new Error('Path and template are required for append action');
         }

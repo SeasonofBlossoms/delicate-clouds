@@ -96,7 +96,7 @@ CLI 入口 (index.ts)
 ```
 types/
 ├── prompts.ts      # 交互提示类型定义
-│   ├── PromptAnswer
+│   ├── Answers
 │   ├── PromptDefinition
 │   └── AIPromptEnhancement
 ├── actions.ts      # 动作执行类型定义

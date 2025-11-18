@@ -1,44 +1,28 @@
 // src/types/prompts.ts
+import type { Question, Answers, } from 'inquirer';
 
-// 方案1：不使用 inquirer 类型，自己定义
-export interface PromptAnswer {
-    [key: string]: any;
-}
+// 重新导出 inquirer 类型
+export type { Question, Answers };
 
-// 自己定义 Prompt 类型
-export interface BasePrompt {
-    type: string;
-    name: string;
-    message: string;
-    default?: any;
-    validate?: (value: any) => boolean | string;
-    when?: (answers: PromptAnswer) => boolean;
-    choices?: Array<{ name: string; value: any, checked?: boolean }> | ((answers: any) => Array<{ name: string; value: any, checked?: boolean }>);
-}
-
-export interface InputPrompt extends BasePrompt {
-    type: 'input';
-}
-
-export interface ConfirmPrompt extends BasePrompt {
-    type: 'confirm';
-}
-
-export interface ListPrompt extends BasePrompt {
-    type: 'list';
-    choices: Array<{ name: string; value: any }>;
-}
-
-export interface CheckboxPrompt extends BasePrompt {
-    type: 'checkbox';
-    // choices: Array<{ name: string; value: any; checked?: boolean }>;
-}
-
-export type Prompt = InputPrompt | ConfirmPrompt | ListPrompt | CheckboxPrompt;
-export type PromptDefinition = Prompt | Prompt[];
-
+// 扩展 inquirer 类型以支持你的特定需求
 export interface AIPromptEnhancement {
     enabled: boolean;
     model?: string;
     temperature?: number;
+
 }
+
+// 自定义 Question 类型，继承 inquirer 的类型
+export interface EnhancedQuestion<T extends Answers = Answers> extends Question<T> {
+    aiEnhancement?: AIPromptEnhancement;
+    validate?: (value: any) => boolean | string;
+}
+
+// 特定类型的快捷方式
+export type InputQuestion = EnhancedQuestion & { type: 'input' };
+export type ConfirmQuestion = EnhancedQuestion & { type: 'confirm' };
+export type ListQuestion = EnhancedQuestion & { type: 'list' };
+export type CheckboxQuestion = EnhancedQuestion & { type: 'checkbox' };
+export type ExpandQuestion = EnhancedQuestion & { type: 'expand' };
+
+export type PromptDefinition = EnhancedQuestion | EnhancedQuestion[];
