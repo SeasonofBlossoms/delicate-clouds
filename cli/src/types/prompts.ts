@@ -13,7 +13,7 @@ export interface BasePrompt {
     default?: any;
     validate?: (value: any) => boolean | string;
     when?: (answers: PromptAnswer) => boolean;
-    choices?: Array<{ name: string; value: any }>;
+    choices?: Array<{ name: string; value: any, checked?: boolean }> | ((answers: any) => Array<{ name: string; value: any, checked?: boolean }>);
 }
 
 export interface InputPrompt extends BasePrompt {
@@ -31,7 +31,7 @@ export interface ListPrompt extends BasePrompt {
 
 export interface CheckboxPrompt extends BasePrompt {
     type: 'checkbox';
-    choices: Array<{ name: string; value: any; checked?: boolean }>;
+    // choices: Array<{ name: string; value: any; checked?: boolean }>;
 }
 
 export type Prompt = InputPrompt | ConfirmPrompt | ListPrompt | CheckboxPrompt;

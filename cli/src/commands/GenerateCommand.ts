@@ -2,8 +2,7 @@
 import { Command } from 'commander';
 import inquirer from 'inquirer'; // 直接导入 inquirer
 import { GeneratorRegistry } from '../core/GeneratorRegistry.js';
-import { ComponentGenerator, } from '../generators/ComponentGenerator.js';
-import { PageGenerator } from '../generators/PageGenerator.js'
+import { ComponentGenerator, PageGenerator } from '../generators/index.js';
 import chalk from 'chalk';
 
 export class GenerateCommand {
@@ -65,6 +64,7 @@ export class GenerateCommand {
                 }))
             }
         ]);
+        console.log('generator', generator);
 
         await this.directGenerate(generator);
     }
