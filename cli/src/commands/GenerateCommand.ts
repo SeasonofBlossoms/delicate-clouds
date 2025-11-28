@@ -52,7 +52,6 @@ export class GenerateCommand {
             return;
         }
 
-        // 修复：使用 inquirer.prompt 而不是 select
         const { generator } = await inquirer.prompt([
             {
                 type: 'list',
@@ -64,7 +63,6 @@ export class GenerateCommand {
                 }))
             }
         ]);
-        console.log('generator', generator);
 
         await this.directGenerate(generator);
     }

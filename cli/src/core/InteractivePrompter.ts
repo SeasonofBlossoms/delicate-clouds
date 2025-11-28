@@ -13,12 +13,15 @@ import type {
     ActionContext
 } from '../types/actions.js';
 import { TemplateEngine } from './TemplateEngine.js';
+import { DeepSeekService } from './DeepSeekService.js';
+import { tableTemplate, tableHook, baseLayout, framework } from '../templates/index.js';
 
 export class InteractivePrompter {
     private templateEngine: TemplateEngine;
-
+    private DeepSeekService: DeepSeekService;
     constructor() {
         this.templateEngine = new TemplateEngine();
+        this.DeepSeekService = new DeepSeekService();
     }
 
     /**
@@ -32,14 +35,14 @@ export class InteractivePrompter {
         try {
             // 转换 prompts 为 inquirer 兼容格式
             const inquirerPrompts = this.normalizePrompts(prompts);
-
-            // 执行提示
+            // 执行提示 
             const answers = await inquirer.prompt(inquirerPrompts, initialAnswers);
 
-            // AI 增强答案
-            const enhancedAnswers = aiEnhancement?.enabled
-                ? await this.aiEnhanceAnswers(answers, aiEnhancement)
-                : answers;
+            // AI 增强答案  
+            // const enhancedAnswers = aiEnhancement?.enabled
+            //     ? await this.aiEnhanceAnswers(answers, aiEnhancement)
+            //     : answers;
+            const enhancedAnswers = answers
 
             return enhancedAnswers as T;
         } catch (error) {
@@ -71,18 +74,37 @@ export class InteractivePrompter {
                     actionList = Array.isArray(result) ? result : [result];
                 }
             } else {
-                actionList = actions as Action[];
+                actionList = actions;
             }
 
             // 过滤需要跳过的 actions
             const filteredActions = actionList.filter(action =>
                 !action.skip || !action.skip(answers)
             );
-
-            // 处理模板
-            return filteredActions.map(action =>
+            const finallyActions = filteredActions.map(action =>
                 this.processActionTemplate(action, answers, context)
             );
+            const prompt = `
+    请根据以下配置生成一个 Vue 页面代码:
+    页面名称: ${answers.name}
+    页面类型: ${answers.pageType}  
+    表格配置: ${JSON.stringify(answers.tableOptions)}
+    操作项: ${JSON.stringify(answers.operaOptions)}
+    表格模板：${tableTemplate(answers)}
+    表格钩子：${tableHook(answers)}
+    布局模板：${baseLayout({ content: '页面内容' })}
+    框架模板：${framework({ templateContent: '模板内容', scriptContent: '脚本内容', styleContent: '样式内容' })}
+    请生成嵌套的 Vue 页面代码。
+  `;
+            try {
+                const res = await this.DeepSeekService.generateResponse(prompt)
+                console.log('generateResponse', res);
+
+            } catch (error) {
+            }
+
+            // 处理模板
+            return finallyActions
         } catch (error) {
             console.error('Action preparation failed:', error);
             throw new Error(`Failed to prepare actions: ${error}`);

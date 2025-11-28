@@ -36,7 +36,6 @@ export class GeneratorRegistry {
         if (!generator) {
             throw new Error(`Generator "${name}" not found`);
         }
-
         // 执行前置钩子
         if (generator.hooks?.preAction) {
             await generator.hooks.preAction(initialData);

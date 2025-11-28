@@ -1,6 +1,6 @@
 // src/generators/PageGenerator.ts
 import type { GeneratorConfig } from '../types/generator.js';
-
+import { tableTemplate, tableHook } from '../templates/index.js';
 export const PageGenerator: GeneratorConfig = {
     description: 'Generate Vue page',
     prompts: [
@@ -12,68 +12,63 @@ export const PageGenerator: GeneratorConfig = {
         },
         {
             type: 'list',
-            name: 'layout',
-            message: 'Page layout:',
+            name: 'pageType',
+            message: '页面:',
             choices: [
-                { name: 'List', value: 'list' },
-                { name: 'Default', value: 'default' },
-                { name: 'Sidebar', value: 'sidebar' },
-                { name: 'Fullscreen', value: 'fullscreen' }
+                { name: '列表页', value: 'listPage' },
             ]
         },
-        {
-            type: 'checkbox',
-            name: 'features',
-            message: 'Page features:',
-            choices: [
-                { name: 'SearchTable', value: 'SearchTable' },
-                { name: 'Search', value: 'search' },
-                { name: 'Form', value: 'form' },
-                { name: 'Pagination', value: 'pagination' }
-            ]
-        },
-        // 更详细的配置选项
-        {
-            type: 'checkbox',
-            name: 'searchTableOptions',
-            message: 'SearchTable options:',
+        /* {
+            type: 'list',
+            name: 'listType',
+            message: '列表展示页:',
             choices: (answers: any) => {
                 const baseOptions = [
-                    { name: 'Batch Operations', value: 'batch' },
-                    { name: 'Row Selection', value: 'selection' },
-                    { name: 'Export Excel', value: 'export' }
+                    { name: '列表页', value: 'table' },
                 ];
-
-                // 根据其他选择动态调整选项
-                if (answers.features && answers.features.includes('form')) {
-                    baseOptions.push(
-                        { name: 'Quick Edit Form', value: 'quickEdit' }
-                    );
-                }
-
-                if (answers.layout === 'list') {
-                    baseOptions.push(
-                        { name: 'Advanced Filters', value: 'advancedFilters' }
-                    );
-                }
-
                 return baseOptions;
             },
             when: (answers: any) => {
-                return answers.features && answers.features.includes('SearchTable');
+                return answers.pageType && answers.pageType.includes('listPage');
+            }
+        }, */
+        // 更详细的配置选项
+        {
+            type: 'checkbox',
+            name: 'tableOptions',
+            message: 'table配置:',
+            choices: () => {
+                const baseOptions = [
+                    { name: '操作列', value: 'operaList' },
+                ];
+                return baseOptions;
+            },
+            // when: (answers: any) => {
+            //     return answers.listType && answers.listType.includes('table');
+            // }
+            validate: (value: string) => value ? true : 'tableOptions is required',
+            when: (answers: any) => {
+                return answers.pageType && answers.pageType.includes('listPage');
+            }
+        },
+        {
+            type: 'checkbox',
+            name: 'operaOptions',
+            message: '操作项:',
+            choices: () => {
+                const baseOptions = [
+                    { name: '编辑', value: 'edit' },
+                    { name: '详情', value: 'detail' },
+                    { name: '删除', value: 'delete' },
+                ];
+                return baseOptions;
+            },
+            validate: (value: string) => value ? true : 'operaOptions is required',
+            when: (answers: any) => {
+                return answers.tableOptions && answers.tableOptions.includes('operaList');
             }
         }
     ],
-    actions: [
-        {
-            type: 'add',
-            path: 'src/views/{{pascalCase name}}.vue',
-            template: `<!-- {{pascalCase name}} Page -->`
-        },
-        {
-            type: 'add',
-            path: 'src/router/{{kebabCase name}}.ts',
-            template: `// Route for {{pascalCase name}} page`
-        }
-    ]
+    actions: []
+
 };
