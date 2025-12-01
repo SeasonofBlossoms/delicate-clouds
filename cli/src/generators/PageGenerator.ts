@@ -69,6 +69,12 @@ export const PageGenerator: GeneratorConfig = {
             }
         }
     ],
-    actions: []
+    actions: [
+        {
+            type: 'add',
+            path: 'src/views/{{pascalCase name}}.vue',
+            template: ''
+        },
+    ]
 
 };

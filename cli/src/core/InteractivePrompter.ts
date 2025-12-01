@@ -85,28 +85,29 @@ export class InteractivePrompter {
                 this.processActionTemplate(action, answers, context)
             );
             const prompt = `
-    请根据以下配置生成一个 Vue 页面代码:
-    页面名称: ${answers.name}
-    页面类型: ${answers.pageType}  
-    表格配置: ${JSON.stringify(answers.tableOptions)}
-    操作项: ${JSON.stringify(answers.operaOptions)}
-    表格模板：${tableTemplate(answers)}
-    表格钩子：${tableHook(answers)}
-    布局模板：${baseLayout({ content: '页面内容' })}
-    框架模板：${framework({ templateContent: '模板内容', scriptContent: '脚本内容', styleContent: '样式内容' })}
-    请生成嵌套的 Vue 页面代码。
+    基于以下配置生成Vue页面代码：
+    页面配置：
+    - 页面名称: ${answers.name}
+    - 页面类型: ${answers.pageType}  
+    - 表格配置: ${JSON.stringify(answers.tableOptions)}
+    - 操作: ${JSON.stringify(answers.operaOptions)}
+    - 表格组件模板：${tableTemplate(answers)}
+    - 表格组件钩子：${tableHook(answers)}
+    - 布局模板：${baseLayout({ content: '页面内容' })}
+    - 框架模板：${framework({ templateContent: '模板内容', scriptContent: '脚本内容', styleContent: '样式内容' })}
+    请直接返回纯净的Vue单文件组件代码：
   `;
             try {
                 const res = await this.DeepSeekService.generateResponse(prompt)
-                console.log('generateResponse', res);
-
+                if (finallyActions && finallyActions[0]) {
+                    finallyActions[0].template = res;
+                }
             } catch (error) {
             }
 
             // 处理模板
             return finallyActions
         } catch (error) {
-            console.error('Action preparation failed:', error);
             throw new Error(`Failed to prepare actions: ${error}`);
         }
     }
