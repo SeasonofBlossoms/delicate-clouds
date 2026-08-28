@@ -1,6 +1,5 @@
 // src/generators/PageGenerator.ts
 import type { GeneratorConfig } from '../types/generator.js';
-import { tableTemplate, tableHook } from '../templates/index.js';
 export const PageGenerator: GeneratorConfig = {
     description: 'Generate Vue page',
     prompts: [
@@ -8,7 +7,7 @@ export const PageGenerator: GeneratorConfig = {
             type: 'input',
             name: 'name',
             message: 'Page name:',
-            validate: (value: string) => value ? true : 'Page name is required'
+            default: 'index'
         },
         {
             type: 'list',
